@@ -1,16 +1,14 @@
 package shape;
+
 public class Rectangle extends FourSidedShape {
 
 	public Rectangle(double width, double height) {
-		this.side1 = width;
-		this.side3 = width;
-		this.side2 = height;
-		this.side4 = height;
+		super(width, height, width, height);
 	}
-	
+
 	@Override
 	public double computeArea() {
-		return side1 * side2;
+		return sides.get(0) * sides.get(1);
 	}
 
 }
