@@ -1,6 +1,21 @@
+import java.util.ArrayList;
+
 public class ShapeTest {
     public static void main(String[] args) {
-
+        ArrayList<Shape> shapes = new ArrayList<Shape>();
+        shapes.add(new Circle(10));
+        shapes.add(new Circle(1));
+        shapes.add(new Triangle(3, 5, 7));
+        shapes.add(new Rectangle(3, 5));
+        for(Shape s : shapes) {
+            System.out.println(s);
+        }
+        for(Shape s : shapes) {
+            s.grow();
+        }
+        for(Shape s : shapes) {
+            System.out.println(s);
+        }
     }
 }
 
