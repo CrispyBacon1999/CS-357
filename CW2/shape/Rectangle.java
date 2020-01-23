@@ -40,6 +40,8 @@ public class Rectangle extends Shape {
     public void grow() {
         side1 *= 1.1;
         side2 *= 1.1;
+        side3 *= 1.1;
+        side4 *= 1.1;
     }
 
     /**
