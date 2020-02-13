@@ -1,4 +1,4 @@
-public class Complex implements Cloneable, Comparable {
+public class Complex implements Cloneable, Comparable<Complex> {
 
     private double a;
     private double b;
@@ -99,19 +99,36 @@ public class Complex implements Cloneable, Comparable {
         if (b == 0) {
             return Double.toString(a);
         }
-        return String.format("%f + %fi", a, b);
+        return String.format("%6.2f + %6.2fi", a, b);
     }
 
+    /**
+     * Compares the magnitudes of the complex numbers and returns the sign of the
+     * number based off which is larger.
+     * 
+     * @return <code>0</code> if this value is equal to <code>o</code>, A negative
+     *         number if this value is smaller than <code>o</code> , and a positive
+     *         number if this value is greater than <code>o</code>
+     */
     @Override
-    public int compareTo(Object o) {
-        double otherAbs = ((Complex) o).abs();
-        return abs() < otherAbs ? -1 : (abs() == otherAbs ? 0 : 1);
+    public int compareTo(Complex o) {
+        return Double.compare(abs(), o.abs());
     }
 
+    /**
+     * Gives the real portion of the complex number.
+     * 
+     * @return the <code>a</code> portion of <code>a + bi</code>
+     */
     public double getRealPart() {
         return a;
     }
 
+    /**
+     * Gives the imaginary portion of the complex number.
+     * 
+     * @return the <code>b</code> portion of <code>a + bi</code>
+     */
     public double getImaginaryPart() {
         return b;
     }
