@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Planar shape that has straight edges and angles. Can have any number of edges
+ * and must have an equal number of angles. Angles must add up to 360 degrees.
+ */
 public abstract class Polygon extends Shape {
 
     protected List<Double> sides;
     protected List<Double> angles;
 
+    /**
+     * Construct a polygon object using the given sides and angles.
+     */
     public Polygon(Double[] sides, Double[] angles) {
         this.sides = Arrays.asList(sides);
+        this.angles = Arrays.asList(angles);
     }
 
     public Polygon(Double[] sides) {
