@@ -1,36 +1,33 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Trends {
-    static TreeMap<String, Integer> hashtags;
-    
+    static Map<String, Integer> hashtags;
+
     public static void main(String[] args) throws FileNotFoundException {
-        hashtags = new TreeMap<String, Integer>();
+        hashtags = new HashMap<String, Integer>();
         Scanner s = new Scanner(new File("files/twitter_data.txt"));
-        while(s.hasNext()) {
+        while (s.hasNext()) {
             String word = s.next();
-            System.out.println(word);
-            if(word.startsWith("#")) {
+            if (word.startsWith("#")) {
                 String key = word.substring(1);
                 try {
                     int count = hashtags.get(key);
                     hashtags.put(key, count + 1);
-                } catch(NullPointerException e) {
+                } catch (NullPointerException e) {
                     hashtags.put(key, 1);
                 }
             }
         }
         s.close();
-        System.out.println(hashtags);
-        NavigableMap temp = hashtags.descendingMap();
-        int i = 0;
-        for(Map.Entry<String, Integer> x : temp.entrySet()) {
-            System.out.println(String.format("%s : %d", x.getKey(), x.getValue()));
-            i++;
-            if(i > 5) {
-                break;
-            }
-        } 
+        LinkedHashMap<String, Integer> sorted = hashtags.entrySet().stream().sorted(Entry.comparingByValue())
+                .collect(Collectors.toMap(Entry::getKey, Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        Object[] keys = sorted.keySet().toArray();
+        for (int i = keys.length - 1; i > keys.length - 6; i--) {
+            System.out.println(keys[i] + " : " + sorted.get(keys[i]));
+        }
     }
 }
